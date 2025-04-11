@@ -2,6 +2,9 @@
 
 name: CI
 
+env:
+  DOCKER_REPO: 'frontend'
+
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -35,11 +38,11 @@ jobs:
       # build using local dockerfile, tag new hash and latest
       - name: Build Docker image with Git SHA tag
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/recipetracker:${{ github.sha }} .
-          docker tag ${{ secrets.DOCKER_USERNAME }}/recipetracker:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/recipetracker:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ github.sha }} .
+          docker tag ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:latest
 
       # push to docker hub
       - name: Push Docker images
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/recipetracker:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/recipetracker:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:latest

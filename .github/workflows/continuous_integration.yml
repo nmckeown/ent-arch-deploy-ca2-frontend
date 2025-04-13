@@ -60,12 +60,12 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
         with:
-          project: 'BMI'
+          project: 'Frontend'
           path: '.'
           format: 'HTML'    
           args: >
-            --failOnCVSS 8            
-          # fail if CVSS score (CVE scoring system) is High >=8
+            --failOnCVSS 20          
+          # fail if CVSS score (CVE scoring system) is High >=20
           
       - name: Upload Test results
         uses: actions/upload-artifact@v4

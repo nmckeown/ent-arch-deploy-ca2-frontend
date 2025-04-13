@@ -14,5 +14,4 @@ RUN npm install
 COPY . .
 
 # Start the application 
-#CMD ["node", "fe-server.js"]
 ENTRYPOINT ["node", "fe-server.js"]
